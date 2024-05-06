@@ -70,14 +70,7 @@ class SQL
 		{
 			$this->_add_param($args[$i]);
 		}
-		
-/*		echo $this->sql . '<br>';
-		if ($this->params != NULL)
-		{
-			print_r($this->params);
-			echo '<br>';
-		}
-		echo '------------------------------------------------<br>';*/
+
 	}
 	
 	function __construct()
@@ -194,7 +187,6 @@ class DbQuery extends SQL
 	{
 		Db::connect();
 		$parsed_sql = $this->get_parsed_sql();
-
 		$this->query = Db::$conn->query($parsed_sql);
 		if (!$this->query)
 		{
@@ -226,22 +218,27 @@ class DbQuery extends SQL
 		return $this;
 	}
 	
-	function next($obj_name = '')
+	function next($obj_name = '', $return_type = MYSQLI_NUM)
 	{
 		if ($this->query == NULL)
 		{
 			$this->exec($obj_name);
 		}
-		return mysqli_fetch_row($this->query);
+        if ($return_type === MYSQLI_NUM) {
+            return mysqli_fetch_row($this->query);
+        } else {
+            return mysqli_fetch_object($this->query);
+        }
+
 	}
 	
-	function record($obj_name)
+	function record($obj_name, $return_type = MYSQLI_NUM )
 	{
-		$row = $this->next($obj_name);
-		if (!$row)
-		{
-			throw new FatalExc(get_label('Unable to find [0].', $obj_name), $this->get_parsed_sql() . '<br>' . Db::$conn->error, true);
-		}
+		$row = $this->next($obj_name, $return_type);
+//		if (!$row)
+//		{
+//			throw new FatalExc(get_label('Unable to find [0].', $obj_name), $this->get_parsed_sql() . '<br>' . Db::$conn->error, true);
+//		}
 		return $row;
 	}
 	

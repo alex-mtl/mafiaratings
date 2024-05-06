@@ -21,7 +21,9 @@ services:
       - DB_DATABASE=mafiaratings
       - DB_USER=root
       - DB_PASS=secret
-      - GOOGLE_API_KEY=
+      - PRODUCT_URL="https://localhost:8080"
+      - PRODUCT_SITE=localhost:8080
+      - GOOGLE_API_KEY=AIzaSyAUuFoIXqzN4c08t13tPX_vW2OZ6c8SA2U
     volumes:
       - .:/var/www/mafiaratings
     expose:

@@ -840,7 +840,7 @@ class EventPageBase extends PageBase
 	protected $event;
 	protected $is_manager;
     private $is_referee;
-    private $show_all;
+    protected $show_all;
 
 	protected function prepare()
 	{

@@ -1273,7 +1273,7 @@ class ApiPage extends OpsApiPageBase
 		Db::begin();
 		foreach ($event_ids as $event_id)
 		{
-			Db::exec(get_label('mailing'), 'INSERT INTO event_mailings (event_id, send_time, status, flags, langs, type) VALUES (?, ?, ' . MAILING_WAITING . ', ?, ?, ?)', $event_id, $time, $flags, $langs, $type);
+			Db::exec(get_label('mailing'), 'INSERT INTO event_mailings (event_id, send_time, status, flags, langs, type, send_count) VALUES (?, ?, ' . MAILING_WAITING . ', ?, ?, ?, 0)', $event_id, $time, $flags, $langs, $type);
 			list ($mailing_id) = Db::record(get_label('mailing'), 'SELECT LAST_INSERT_ID()');
 			list ($club_id) = Db::record(get_label('event'), 'SELECT club_id FROM events WHERE id = ?', $event_id);
 					

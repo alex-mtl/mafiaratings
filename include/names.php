@@ -156,6 +156,10 @@ function check_address_name($name, $club_id, $address_id = -1)
 
 class Names
 {
+    private $obj_name;
+    private $names;
+    private $id;
+
 	// if $name_id == 0 - name_id does not exist it has to be created - names are taken from $_REQUEST
 	// if $name_id > 0 - name_id does exist - names are taken from the database
 	// if $name_id < 0 - name_id does not exist it has to be created - $param_name is treated as the only name.

@@ -11,6 +11,8 @@ class Page extends EventPageBase
 {
 	private $players_list;
 	private $first;
+	private $scoring_options;
+
 	
 	protected function prepare()
 	{

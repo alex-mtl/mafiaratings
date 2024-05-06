@@ -85,7 +85,7 @@ function create_event($event_name, $address_id, $club_id, $start, $end, $notes, 
 	db_log(LOG_OBJECT_EVENT, 'round created', $log_details, $tournament_id, $club_id);
 }
 
-function create_rounds($type, $langs, $scoring_options, $address_id, $club_id, $start, $end, $notes, $langs, $fee, $currency_id, $scoring_id, $scoring_version, $tournament_id, $rules_code)
+function create_rounds($type, $langs, $scoring_options, $address_id, $club_id, $start, $end, $notes, $fee, $currency_id, $scoring_id, $scoring_version, $tournament_id, $rules_code)
 {
 	global $_lang;
 	if (is_valid_lang($langs))
@@ -336,7 +336,7 @@ class ApiPage extends OpsApiPageBase
 		$log_details->parent_series = json_encode($parent_series);
 		db_log(LOG_OBJECT_TOURNAMENT, 'created', $log_details, $tournament_id, $club_id);
 		
-		create_rounds($type, $langs, $scoring_options, $address_id, $club_id, $start, $end, $notes, $langs, $fee, $currency_id, $scoring_id, $scoring_version, $tournament_id, $rules_code);
+		create_rounds($type, $langs, $scoring_options, $address_id, $club_id, $start, $end, $notes, $fee, $currency_id, $scoring_id, $scoring_version, $tournament_id, $rules_code);
 		
 		// create parent series records
 		foreach ($parent_series as $s)
@@ -658,7 +658,7 @@ class ApiPage extends OpsApiPageBase
 			Db::exec(get_label('round'), 'DELETE FROM event_incomers WHERE event_id IN (SELECT id FROM events WHERE tournament_id = ?)', $tournament_id);
 			Db::exec(get_label('round'), 'DELETE FROM events WHERE tournament_id = ?', $tournament_id);
 			
-			create_rounds($type, $langs, $scoring_options, $address_id, $club_id, $start, $end, $notes, $langs, $fee, $currency_id, $scoring_id, $scoring_version, $tournament_id, $rules_code);
+			create_rounds($type, $langs, $scoring_options, $address_id, $club_id, $start, $end, $notes, $fee, $currency_id, $scoring_id, $scoring_version, $tournament_id, $rules_code);
 		}
 		else if ($rules_code != $old_rules_code)
 		{

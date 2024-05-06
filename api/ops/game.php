@@ -60,15 +60,22 @@ function compare_players($player1, $player2)
 
 class GPlayer
 {
-	function __construct($id, $name, $club, $u_flags, $club_user_flags)
-	{
-		$this->id = (int)$id;
-		$this->name = $name;
-		$this->club = $club; 
-		$this->nicks = array();
-		$this->flags = (int)(($club_user_flags & (USER_PERM_PLAYER | USER_PERM_REFEREE)) + ($u_flags & (USER_FLAG_MALE | USER_FLAG_IMMUNITY)));
-	}
+    public int $id;
+    public string $name;
+    public string $club;
+    public array $nicks = [];
+    public int $flags;
+
+    public function __construct(int $id, string $name, string $club, int $u_flags, int $club_user_flags)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->club = $club;
+        $this->nicks = [];
+        $this->flags = (int)(($club_user_flags & (USER_PERM_PLAYER | USER_PERM_REFEREE)) + ($u_flags & (USER_FLAG_MALE | USER_FLAG_IMMUNITY)));
+    }
 }
+
 
 class GClub
 {
@@ -84,7 +91,8 @@ class GClub
 	public $addrs;
 	public $icon;
 	public $rules_code;
-	
+	public $tournaments;
+
 	function __construct($id, $gs)
 	{
 		global $_profile, $_lang;
@@ -308,6 +316,7 @@ class GUser
 	public $manager;
 	public $settings;
 	public $clubs;
+    public $sounds;
 	
 	function __construct($club_id)
 	{
